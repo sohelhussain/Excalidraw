@@ -1,5 +1,6 @@
 import express from "express";
-import { CreateRoomSchema } from "@repo/common/types"
+import { CreateRoomSchema, CreateUserSchema } from "@repo/common/types"
+import {prismaClient} from "@repo/db/prisma"
 
 
 const app = express();
@@ -8,30 +9,43 @@ app.get('/', (req, res) => {
     res.send('server is helthy')
 })
 
-app.post('/signup', (req, res) => {
+app.post('/signup', async (req, res) => {
 
-    const data = CreateRoomSchema.safeParse(req.body)
+    const parseData = CreateUserSchema.safeParse(req.body)
 
-    if(!data.success) {
+    if(!parseData.success) {
         res.json({
             message: "Incorrect Inputs"
         })
         return;
     }
 
-    const {email, password} = req.body;
+    // find the user by email
+
+    const user = await prismaClient.user.findUnique({
+        where: {
+            email: parseData.data.email
+        }
+    })
+    if(user) {
+        res.json({
+            message: 'your already signup please go to signin'
+        });
+        return;
+    }
 
 
-    
+    // hash the password
 
-    //find the user by email
-
-    //create the user 
-
-    // const user = prisma.User.create({
-    //     email,
-    //     password
-    // })
+    // create the user 
+    const newUser = await prismaClient.user.create({
+        data: {
+            email: parseData.data.email,
+            password: parseData.data.password,
+            name: parseData.data.name,
+            photo: parseData.data.photo
+        }
+    })
 
 
 })

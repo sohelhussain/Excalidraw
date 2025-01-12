@@ -12,3 +12,33 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  photo     String?
+  rooms     Room[]
+  chats     Chat[]
+  createdAt DateTime @default(now())
+}
+
+model Chat {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  roomId    String
+  message   String
+  user      User     @relation(fields: [userId], references: [id])
+  room      Room     @relation(fields: [roomId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Room {
+  id        String   @id @default(uuid())
+  slug      String
+  createdAt DateTime @default(now())
+  adminId   String
+  admin     User     @relation(fields: [adminId], references: [id])
+  chats     Chat[]
+}
