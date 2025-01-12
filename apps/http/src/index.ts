@@ -1,4 +1,5 @@
 import express from "express";
+import { CreateRoomSchema } from "@repo/common/types"
 
 
 const app = express();
@@ -8,7 +9,20 @@ app.get('/', (req, res) => {
 })
 
 app.post('/signup', (req, res) => {
+
+    const data = CreateRoomSchema.safeParse(req.body)
+
+    if(!data.success) {
+        res.json({
+            message: "Incorrect Inputs"
+        })
+        return;
+    }
+
     const {email, password} = req.body;
+
+
+    
 
     //find the user by email
 
