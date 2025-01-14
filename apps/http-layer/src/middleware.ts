@@ -7,11 +7,12 @@ interface CostomReq extends Request {
     userId: string;
 }
 
-export function middleware(req: CostomReq, res: Response, next: NextFunction) {
+export function middleware(req: Request, res: Response, next: NextFunction) {
     const header = req.headers["authorization"] ?? "";
     const decoded = jwt.verify(header, JWT_SECRET);
 
     if(decoded){
+        //@ts-ignore
         req.userId = (decoded as JwtPayload).userId;
         next();
     } else {
