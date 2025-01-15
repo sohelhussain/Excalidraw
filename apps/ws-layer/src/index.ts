@@ -38,7 +38,6 @@ function checkUserIfo(token: string): string | null {
     return null;
   }
 
-  return null;
 
 }
 

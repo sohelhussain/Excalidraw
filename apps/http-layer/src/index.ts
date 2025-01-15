@@ -50,8 +50,7 @@ app.post('/signup', async (req, res) => {
         data: {
             email: parseData.data.email,
             password: hash,
-            name: parseData.data.name,
-            photo: parseData.data.photo
+            name: parseData.data.name
         }
     });
 
