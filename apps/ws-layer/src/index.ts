@@ -78,7 +78,7 @@ wss.on("connection", (ws, request) => {
         if(!user){
           return;
         }
-        user.rooms = user.rooms.filter(user => user == parsedData.room);
+        user.rooms = user.rooms.filter(roomId => roomId === parsedData.room);
       }
 
 
@@ -94,8 +94,8 @@ wss.on("connection", (ws, request) => {
           }
         });
   
-        users.forEach(user => {
-          if (user.rooms.includes(roomId)) {
+        users.forEach(user => { // going to each user and is this user are present in this room send the message to every one
+          if (user.rooms.includes(roomId)) { // roomId present in this rooms array then return true
             user.ws.send(JSON.stringify({
               type: "chat",
               message: message,
