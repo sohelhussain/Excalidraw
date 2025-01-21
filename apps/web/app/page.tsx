@@ -31,7 +31,7 @@ export default function Home() {
         <input value={email} onChange={(e) => setEmail(e.target.value)} style={{display: "block"}} type="email" placeholder="Enter your Email" id="" />
         <input value={password} onChange={(e) => setPassword(e.target.value)} style={{display: "block"}} type="password" placeholder="Enter your password" />
         <button style={{display: "block"}} onClick={() => sendInput()}>Signup</button>
-        <a href="/signin">you are a already user? go to signin page</a>
+        <a href="/signin" className="text-red-400">you are a already user? go to signin page</a>
       </div>
     </div>
   );
