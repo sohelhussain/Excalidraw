@@ -9,5 +9,4 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "../../packages/ui/**/*.{js,jsx,ts,tsx}", // For your UI library (shared components)
   ]
-  //   agar tum vahi karo jo kar skte ho, to tum aaj jo ho usse jyada tum kabhi nhi ban baoge
 };
