@@ -21,6 +21,7 @@ model User {
   photo     String?
   rooms     Room[]
   chats     Chat[]
+  shapes    Shape[]
   createdAt DateTime @default(now())
 }
 
@@ -41,4 +42,24 @@ model Room {
   adminId   String
   admin     User     @relation(fields: [adminId], references: [id])
   chats     Chat[]
+  shapes    Shape[]
+}
+
+model Shape {
+  id      Int     @id @default(autoincrement())
+  userId  String
+  roomId  String
+  room    Room    @relation(fields: [roomId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+  type    String
+  width   Int?
+  height  Int?
+  startX  Int
+  startY  Int
+  radius  Int?
+  image   String?
+  text  String?
+  strokeColor String?
+  fillColor String?
+  round String?
 }

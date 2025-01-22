@@ -1,3 +1,6 @@
+import axios from "axios";
+import { HTTP_URL } from "@repo/server-common/config";
+
 type Shap = {
   type: String;
   x: number;
@@ -6,8 +9,8 @@ type Shap = {
   height: number;
 };
 
-export function initDraw(canvas: HTMLCanvasElement) {
-  const shap: Shap[] = [];
+export async function initDraw(canvas: HTMLCanvasElement, roomId: string) {
+  const shap: Shap[] = await getingTheShap(roomId);
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -66,4 +69,11 @@ function reRenderCanvas(
       ctx.strokeRect(element.x, element.y, element.width, element.height);
     }
   });
+}
+
+
+async function getingTheShap(roomid: string) {
+    const res = await axios.get(`${HTTP_URL}/shapes/${roomid}`)
+    const shape = res.data.message;
+    return shape.map((shape: {message: string}) => JSON.parse(shape.message))
 }

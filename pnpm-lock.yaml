@@ -54,9 +54,15 @@ importers:
 
   apps/web:
     dependencies:
+      '@repo/common':
+        specifier: workspace:*
+        version: link:../../packages/common
       '@repo/config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
+      '@repo/server-common':
+        specifier: workspace:*
+        version: link:../../packages/server-common
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
