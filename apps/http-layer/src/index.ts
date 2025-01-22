@@ -140,6 +140,27 @@ app.post('/room', middleware, async (req, res) => {
 
 })
 
+app.get('/shapes/:roomid', async (req, res) => {
+try {
+        const roomId = req.params.roomid;
+
+    const shape = await prismaClient.shape.findMany({
+        where: {
+            roomId: roomId
+        }
+    })
+
+    res.json({
+        shape
+    })
+} catch (error) {
+   res.json({
+    shape: []
+   }) 
+}
+
+})
+
 app.get('/chats/:roomid', async (req, res) => {
 try {
         const roomId = req.params.roomid;

@@ -14,6 +14,8 @@
     "@repo/ui": "workspace:*",
     "@types/axios": "^0.14.4",
     "@repo/config": "workspace:*",
+    "@repo/server-common": "workspace:*",
+    "@repo/common": "workspace:*",
     "axios": "^1.7.9",
     "next": "^15.1.0",
     "react": "^19.0.0",
