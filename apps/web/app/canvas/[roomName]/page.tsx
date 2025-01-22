@@ -1,27 +1,22 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-
+import { initDraw } from "../../../draw";
 
 export default function Canvas() {
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    useEffect(()=>{
-        if(canvasRef.current){
-             const canvas = canvasRef.current;
-             const ctx = canvas.getContext("2d");
-
-             if(!ctx){
-                return;
-             }
-
-             ctx.strokeRect(0,25,100,100)
+    useEffect(() => {
+        if (canvasRef.current) {
+            const canvas = canvasRef.current;
+           
+            initDraw(canvas);
 
         }
-    },[canvasRef])
+    }, [canvasRef])
 
-    return <div className="w-full h-screen bg-zinc-600">
-        <canvas ref={canvasRef}></canvas>
+    return <div className="w-full h-screen">
+        <canvas ref={canvasRef} ></canvas>
     </div>
 }
