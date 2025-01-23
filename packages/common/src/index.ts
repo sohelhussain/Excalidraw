@@ -7,7 +7,7 @@ export const CreateUserSchema = z.object({
     email: z.string().min(3).max(20),
     password: z.string(),
     name: z.string(),
-    photo: z.string().optional()
+    photo: z.optional(z.string())
 })
 
 export const SigninUserSchema = z.object({
@@ -20,14 +20,16 @@ export const CreateRoomSchema = z.object({
 })
 export const CreateShapeSchema = z.object({
     type: z.string(),
-    width: z.number().optional(),
-    height: z.number().optional(),
+    width: z.optional(z.number()),
+    height: z.optional(z.number()),
     startX: z.number(),
     startY: z.number(),
-    radius: z.number().optional(),
-    image: z.string().optional(),
-    text: z.string().optional(),
-    strokeColor: z.string().optional(),
-    fillColor: z.string().optional(),
-    round: z.string().optional()
+    endX: z.number(),
+    endY: z.number(),
+    radius: z.optional(z.number()),
+    image: z.optional(z.string()),
+    text: z.optional(z.string()),
+    strokeColor: z.optional(z.string()),
+    fillColor: z.optional(z.string()),
+    round: z.optional(z.string())
 })

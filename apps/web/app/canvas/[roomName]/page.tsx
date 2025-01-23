@@ -1,10 +1,11 @@
-import Canvas from "../../components/Canvas";
+import WsConnection from "../../components/WsConnection";
 
-export default async function Room({params}: {params: Promise<{roomId: string}>}) {
+export default async function Room({params}: {params: Promise<{roomName: string}>}) {
 
+    const roomId = (await params).roomName;
     
-    const roomId = (await params).roomId;
+    console.log(`page${roomId}`); 
 
-    return <Canvas roomId={roomId} />;
+    return <WsConnection roomId={roomId} />;
     
 }

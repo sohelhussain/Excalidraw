@@ -105,6 +105,147 @@ wss.on("connection", (ws, request) => {
         })
       }
 
+      if (parsedData.type === "rect") {
+        const roomId = parsedData.roomId;
+        const startX = parsedData.x;
+        const startY = parsedData.y;
+        const width = parsedData.width;
+        const height = parsedData.height;
+        
+        console.log(parsedData);
+
+        await prismaClient.shape.create({
+          data: {
+            roomId,
+            userId,
+            type: parsedData.type,
+            startX,
+            startY,
+            width,
+            height
+          }
+        });
+        
+        users.forEach(user => { 
+          if (user.rooms.includes(roomId)) { 
+            user.ws.send(JSON.stringify({
+            roomId,
+            userId,
+            type: parsedData.type,
+            startX,
+            startY,
+            width,
+            height
+            }))
+          }
+        })
+      }
+      
+      if (parsedData.type === "circle") {
+        const roomId = parsedData.roomId;
+        const startX = parsedData.startX;
+        const startY = parsedData.startY;
+        const radius = parsedData.radius;
+  
+        await prismaClient.shape.create({
+          data: {
+            roomId,
+            userId,
+            type: parsedData.type,
+            startX,
+            startY,
+            radius
+          }
+        });
+  
+        users.forEach(user => { 
+          if (user.rooms.includes(roomId)) {
+            user.ws.send(JSON.stringify({
+              type: "rect",
+              message: message,
+              roomId
+            }))
+          }
+        })
+      }
+      if (parsedData.type === "line") {
+        const roomId = parsedData.roomId;
+        const startX = parsedData.startX;
+        const startY = parsedData.startY;
+        const width = parsedData.width;
+  
+        await prismaClient.shape.create({
+          data: {
+            roomId,
+            userId,
+            type: parsedData.type,
+            startX,
+            startY,
+            width
+          }
+        });
+  
+        users.forEach(user => { // going to each user and is this user are present in this room send the message to every one
+          if (user.rooms.includes(roomId)) { // roomId present in this rooms array then return true
+            user.ws.send(JSON.stringify({
+              type: "rect",
+              message: message,
+              roomId
+            }))
+          }
+        })
+      }
+      if (parsedData.type === "text") {
+        const roomId = parsedData.roomId;
+        const startX = parsedData.startX;
+        const startY = parsedData.startY;
+  
+        await prismaClient.shape.create({
+          data: {
+            roomId,
+            userId,
+            type: parsedData.type,
+            startX,
+            startY
+          }
+        });
+  
+        users.forEach(user => { // going to each user and is this user are present in this room send the message to every one
+          if (user.rooms.includes(roomId)) { // roomId present in this rooms array then return true
+            user.ws.send(JSON.stringify({
+              type: "rect",
+              message: message,
+              roomId
+            }))
+          }
+        })
+      }
+      if (parsedData.type === "image") {
+        const roomId = parsedData.roomId;
+        const startX = parsedData.startX;
+        const startY = parsedData.startY;
+  
+        await prismaClient.shape.create({
+          data: {
+            roomId,
+            userId,
+            type: parsedData.type,
+            startX,
+            startY
+          }
+        });
+  
+        users.forEach(user => { // going to each user and is this user are present in this room send the message to every one
+          if (user.rooms.includes(roomId)) { // roomId present in this rooms array then return true
+            user.ws.send(JSON.stringify({
+              type: "rect",
+              message: message,
+              roomId
+            }))
+          }
+        })
+      }
+
      
 
 
