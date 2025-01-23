@@ -3,16 +3,22 @@ import { useEffect, useRef } from "react";
 import { initDraw } from "../../draw";
 
 
-export default function Canvas({roomId}: {roomId: string} ) {
+export default function Canvas({roomId, socket}: {roomId: string, socket: WebSocket} ) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+
+
     useEffect(() => {
         if (canvasRef.current) {
             const canvas = canvasRef.current;
-           
-            initDraw(canvas, roomId);
-
+            initDraw(canvas, roomId, socket);
         }
-    }, [canvasRef])
+    }, [canvasRef]);
+
+   
+
+    if(!socket){
+        return <div> connecting to server</div>
+    }
 
     return <div className="w-full h-screen relative">
         <canvas ref={canvasRef}></canvas>
