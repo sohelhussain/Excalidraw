@@ -13,6 +13,7 @@ export default function Home() {
   const [password, setPassword] = useState<string>("");
 
   function sendInput() {
+
     
   }
 
