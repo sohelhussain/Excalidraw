@@ -17,14 +17,7 @@ export default function Home() {
   }
 
   return (
-    <div style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      flexDirection: "column",
-      width: "100%",
-      height: "100vh"
-    }}>
+    <div>
 
       <div>
         <input value={name} onChange={(e) => setName(e.target.value)} style={{display: "block"}} type="text" placeholder="Enter your name" />
