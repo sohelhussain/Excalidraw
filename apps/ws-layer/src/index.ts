@@ -44,6 +44,7 @@ function checkUserIfo(token: string): string | null {
 wss.on("connection", (ws, request) => {
 
   const url = request.url; //ws://localhost:8080?token=asdkljdkfl342
+
   if(!url) {
     return;
   }
