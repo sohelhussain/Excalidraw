@@ -50,6 +50,7 @@ wss.on("connection", (ws, request) => {
   }
   
   const queryParams = new URLSearchParams(url.split("?")[1]) //["ws://localhost:8080", "token=asdkljdkfl342"]
+  
   const token = queryParams.get('token') || "";
 
   const userId = checkUserIfo(token)
