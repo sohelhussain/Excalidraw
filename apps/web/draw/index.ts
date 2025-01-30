@@ -58,6 +58,7 @@ export async function initDraw(canvas: HTMLCanvasElement, roomId: string, socket
 }
 
   ctx.fillStyle = "black";
+
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   let clicked = false;
