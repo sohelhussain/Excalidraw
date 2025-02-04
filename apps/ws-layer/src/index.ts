@@ -68,7 +68,12 @@ wss.on("connection", (ws, request) => {
   })
 
     ws.on('message', async function message(data) {
-      const parsedData = JSON.parse(data as unknown as string); //{type: "join_room", roomId: 1};
+      let parsedData: any;
+      if(typeof data !== "string"){
+        const parsedData = JSON.parse(data.toString()); //{type: "join_room", roomId: 1};
+      } else {
+        parsedData = JSON.parse(data);
+      }
 
       if (parsedData.type === "join_room") {
         const user = users.find(x => x.ws === ws);
@@ -95,7 +100,9 @@ wss.on("connection", (ws, request) => {
             userId
           }
         });
-  
+        
+        
+        users.forEach(user => {  console.log(`users ${user}`) })
         users.forEach(user => { // going to each user and is this user are present in this room send the message to every one
           if (user.rooms.includes(roomId)) { // roomId present in this rooms array then return true
             user.ws.send(JSON.stringify({
@@ -127,7 +134,7 @@ wss.on("connection", (ws, request) => {
             height
           }
         });
-        
+
         users.forEach(user => { 
           if (user.rooms.includes(roomId)) { 
             user.ws.send(JSON.stringify({
