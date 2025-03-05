@@ -22,5 +22,6 @@ export default function WsConnection({roomId}: {roomId: string}) {
     if(!socket) {
         return <div> connecting to server</div>
     }
+    
     return <Canvas roomId={roomId} socket={socket} />
 }

@@ -42,7 +42,7 @@ function checkUserIfo(token: string): string | null {
 }
 
 wss.on("connection", (ws, request) => {
-
+console.log(`user connected`);
   const url = request.url; //ws://localhost:8080?token=asdkljdkfl342
 
   if(!url) {
@@ -52,8 +52,9 @@ wss.on("connection", (ws, request) => {
   const queryParams = new URLSearchParams(url.split("?")[1]) //["ws://localhost:8080", "token=asdkljdkfl342"]
   
   const token = queryParams.get('token') || "";
-
+  console.log(`this is a token ${token}`);
   const userId = checkUserIfo(token)
+  console.log(`this is a userId ${userId}`);
 
   if(userId == null) {
     ws.close();
@@ -70,12 +71,15 @@ wss.on("connection", (ws, request) => {
     ws.on('message', async function message(data) {
       let parsedData: any;
       if(typeof data !== "string"){
+        console.log(data);
         const parsedData = JSON.parse(data.toString()); //{type: "join_room", roomId: 1};
       } else {
         parsedData = JSON.parse(data);
       }
 
+      console.log(parsedData);
       if (parsedData.type === "join_room") {
+        console.log(parsedData.type);
         const user = users.find(x => x.ws === ws);
         user?.rooms.push(parsedData.roomId);
       }
