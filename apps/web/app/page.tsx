@@ -27,6 +27,7 @@ export default function Home() {
         <Button className="bg-green-200 rounded-lg" appName="work">alret</Button>
         <a href="/signin" className="text-red-400">you are a already user? go to signin page</a>
       </div>
+      
     </div>
   );
 }
